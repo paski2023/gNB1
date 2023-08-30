@@ -308,12 +308,12 @@ UeListM* build_ue_list_message(){
         // read mesures and add to message (actually just send random data)
 
         // measures
-        ue_info_list[i]->has_meas_type_1 = 1;
-        ue_info_list[i]->meas_type_1 = rand();
-        ue_info_list[i]->has_meas_type_2 = 1;
-        ue_info_list[i]->meas_type_2 = rand();
-        ue_info_list[i]->has_meas_type_3 = 1;
-        ue_info_list[i]->meas_type_3 = rand();
+        ue_info_list[i]->has_ber_uplink = 1;
+        ue_info_list[i]->ber_uplink = rand();
+        ue_info_list[i]->has_rnti = 1;
+        ue_info_list[i]->rnti = rand();
+        ue_info_list[i]->has_cell_size = 1;
+        ue_info_list[i]->cell_size = rand();
 
         // properties
         ue_info_list[i]->has_prop_1 = 1;
