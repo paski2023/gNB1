@@ -1,4 +1,4 @@
-[submodule "oai-oran-protolib"]
-	path = oai-oran-protolib
+[submodule "oai-oran-protolib1"]
+	path = oai-oran-protolib1
 	url = https://github.com/paski2023/Protolib1
 	branch = mrn-base
