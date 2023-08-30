@@ -1,4 +1,4 @@
 [submodule "oai-oran-protolib"]
 	path = oai-oran-protolib
-	url = https://github.com/paski2023/Protolib1/blob/mrn-base/ran_messages.proto
+	url = https://github.com/paski2023/Protolib1
 	branch = mrn-base
