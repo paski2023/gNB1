@@ -304,21 +304,34 @@ UeListM* build_ue_list_message(){
 
         // read rnti and add to message
         ue_info_list[i]->rnti = connected_ue_list[i].rnti;
-        ue_info_list[i]->ue_ber_uplink = rand();  
-        ue_info_list[i]->ue_ber_downlink = rand(); 
-        ue_info_list[i]->ue_rsrp = rand();  
-        ue_info_list[i]->ue_mcs_uplink = rand();   
-        ue_info_list[i]->ue_mcs_downlink = rand();
-        ue_info_list[i]->cell_size = rand();
+        ue_info_list[i]->ue_ber_uplink = connected_ue_list[i].ue_ber_uplink;  
+        ue_info_list[i]->ue_ber_downlink = connected_ue_list[i].ue_ber_downlink ; 
+        ue_info_list[i]->ue_rsrp = connected_ue_list[i].ue_rsrp;  
+        ue_info_list[i]->ue_mcs_uplink = connected_ue_list[i].ue_mcs_uplink;   
+        ue_info_list[i]->ue_mcs_downlink = connected_ue_list[i].ue_mcs_downlink;
+        ue_info_list[i]->cell_size = connected_ue_list[i].cell_size;
 
 
         // read mesures and add to message (actually just send random data)
 
         // measures
+        ue_info_list[i]->has_meas_type_1 = 1;
+        ue_info_list[i]->meas_type_1 = rand();
+        ue_info_list[i]->has_meas_type_2 = 1;
+        ue_info_list[i]->meas_type_2 = rand();
+        ue_info_list[i]->has_meas_type_3 = 1;
+        ue_info_list[i]->meas_type_3 = rand();
+
         ue_info_list[i]->has_ue_ber_uplink = 1;
-        ue_info_list[i]->ber_uplink = rand();
-        ue_info_list[i]->has_rnti = 1;
-        ue_info_list[i]->rnti = rand();
+        ue_info_list[i]->ue_ber_uplink = rand();
+        ue_info_list[i]->has_ue_ber_downlink = 1;
+        ue_info_list[i]->ue_ber_downlink = rand();
+        ue_info_list[i]->has_ue_mcs_uplink = 1;
+        ue_info_list[i]->ue_mcs_uplink= rand();
+        ue_info_list[i]->has_ue_mcs_downlink = 1;
+        ue_info_list[i]->ue_mcs_downklin= rand();
+        ue_info_list[i]->has_ue_rsrp = 1;
+        ue_info_list[i]->ue_rsrp= rand();
         ue_info_list[i]->has_cell_size = 1;
         ue_info_list[i]->cell_size = rand();
 
