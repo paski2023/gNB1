@@ -32,6 +32,14 @@ void initialize_ues_if_needed(){
         connected_ue_list[ue].rnti = rand();
         connected_ue_list[ue].prop_1 = false;
         connected_ue_list[ue].prop_2 = -1;
+        connected_ue_list[ue].rsrp = rand();
+        connected_ue_list[ue].ber_uplink = rand();
+        connected_ue_list[ue].ber_downlink = rand();
+        connected_ue_list[ue].mcs_downlink = rand();
+        connected_ue_list[ue].mcs_downlink = rand();
+        connected_ue_list[ue].cell_size_downlink = rand();
+        
+        
     }
     is_initialized = true;
 }
