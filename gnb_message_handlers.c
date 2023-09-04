@@ -62,6 +62,38 @@ void handle_indication_request(RANMessage* in_mess,int out_socket, sockaddr_in p
         printf("\tParameter id %d requested (a.k.a %s)\n",\
         in_mess->ran_indication_request->target_params[par_i],\
         get_enum_name(in_mess->ran_indication_request->target_params[par_i]));
+
+        // Handle the new parameters here
+        switch (in_mess->ran_indication_request->target_params[par_i]) {
+            case RAN_PARAMETER__UE_RSRP:
+                // Extract UE_RSRP value from the gNB's data and store it
+                connected_ue_list[i].ue_rsrp = get_ue_rsrp_from_gNB()
+                break;
+            case RAN_PARAMETER__UE_BER_UPLINK:
+                // Extract UE_BER_UPLINK value and store it
+                connected_ue_list[i].ue_ber_uplink = get_ue_ber_uplink_from_gNB();
+                break;
+            case RAN_PARAMETER__UE_BER_DOWNLINK:
+                connected_ue_list[i].ue_ber_downlink = get_ue_ber_downlink_from_gNB();
+                break;
+            case RAN_PARAMETER__UE_MCS_UPLINK:
+                // Extract UE_MCS_UPLINK value and store it
+                connected_ue_list[i].ue_mcs_uplink = get_ue_mcs_uplink_from_gNB();
+                break;
+            case RAN_PARAMETER__UE_MCS_DOWNLINK:
+                // Extract UE_MCS_DOWNLINK value and store it
+                connected_ue_list[i].ue_mcs_downlink = get_ue_mcs_downlink_from_gNB();
+                break;
+            case RAN_PARAMETER__CELL_SIZE:
+                // Extract CELL_SIZE value and store it
+                connected_ue_list[i].cell_size = get_cell_size_from_gNB();
+                break;
+            
+            
+            default:
+                // Handle unknown parameter or report an error
+                break;
+        }
     }
     build_indication_response(in_mess, out_socket, peeraddr);
 }
@@ -329,7 +361,7 @@ UeListM* build_ue_list_message(){
         ue_info_list[i]->has_ue_mcs_uplink = 1;
         ue_info_list[i]->ue_mcs_uplink= rand();
         ue_info_list[i]->has_ue_mcs_downlink = 1;
-        ue_info_list[i]->ue_mcs_downklin= rand();
+        ue_info_list[i]->ue_mcs_downlink= rand();
         ue_info_list[i]->has_ue_rsrp = 1;
         ue_info_list[i]->ue_rsrp= rand();
         ue_info_list[i]->has_cell_size = 1;
@@ -379,6 +411,36 @@ void ran_read(RANParameter ran_par_enum, RANParamMapEntry* map_entry){
             map_entry->value_case=RAN_PARAM_MAP_ENTRY__VALUE_UE_LIST;
             map_entry->ue_list = build_ue_list_message();
             break;
+        case RAN_PARAMETER__UE_RSRP:
+            map_entry->value_case = RAN_PARAM_MAP_ENTRY__VALUE_INT64_VALUE;
+            map_entry->int64_value = connected_ue_list[i].ue_rsrp;
+            break;
+        case RAN_PARAMETER__UE_BER_UPLINK:
+            // Set UE_BER_UPLINK value in map_entry
+            map_entry->value_case = RAN_PARAM_MAP_ENTRY__VALUE_INT64_VALUE;
+            map_entry->int64_value = connected_ue_list[i].ue_ber_uplink;
+            break;
+        case RAN_PARAMETER__UE_BER_DOWNLINK:
+            // Set UE_BER_DOWNLINK value in map_entry
+            map_entry->value_case = RAN_PARAM_MAP_ENTRY__VALUE_INT64_VALUE;
+            map_entry->int64_value = connected_ue_list[i].ue_ber_downlink;
+            break;
+         case RAN_PARAMETER__UE_MCS_UPLINK:
+            // Set UE_MCS_UPLINK value in map_entry
+            map_entry->value_case = RAN_PARAM_MAP_ENTRY__VALUE_INT64_VALUE;
+            map_entry->int64_value = connected_ue_list[i].ue_mcs_uplink;
+            break;
+        case RAN_PARAMETER__UE_MCS_DOWNLINK:
+            // Set UE_MCS_DOWNLINK value in map_entry
+            map_entry->value_case = RAN_PARAM_MAP_ENTRY__VALUE_INT64_VALUE;
+            map_entry->int64_value = connected_ue_list[i].ue_mcs_downlink;
+            break;
+        case RAN_PARAMETER__CELL_SIZE:
+            // Set CELL_SIZE value in map_entry
+            map_entry->value_case = RAN_PARAM_MAP_ENTRY__VALUE_INT64_VALUE;
+            map_entry->int64_value = connected_ue_list[i].cell_size;
+            break;
+        
         default:
             printf("Unrecognized param %d\n",ran_par_enum);
             assert(0!=0);
