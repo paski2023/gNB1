@@ -5,8 +5,8 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/*
 
 # clone repo
-RUN git clone https://github.com/ANTLab-polimi/gNB-e2sm-emu.git /gNB-e2sm-emu
-WORKDIR /gNB-e2sm-emu
+RUN git clone https://github.com/paski2023/gNB1.git /gNB1
+WORKDIR /gNB1
 
 # checkout mrn-base
 RUN git checkout mrn-base
