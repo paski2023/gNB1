@@ -10,8 +10,6 @@ int gnb_id = 0;
 bool is_initialized = false;
 typedef struct {
     int rnti;
-    bool prop_1;
-    float prop_2;
     float ue_rsrp;
     float ue_ber_uplink;
     float ue_ber_downlink;
@@ -29,8 +27,6 @@ void initialize_ues_if_needed(){
         return;
     for (int ue=0;ue<CONNECTED_UES;ue++){
         connected_ue_list[ue].rnti = rand();
-        connected_ue_list[ue].prop_1 = false;
-        connected_ue_list[ue].prop_2 = -1;
         connected_ue_list[ue].ue_rsrp = rand();
         connected_ue_list[ue].ue_ber_uplink = rand();
         connected_ue_list[ue].ue_ber_downlink = rand();
@@ -64,39 +60,40 @@ void handle_indication_request(RANMessage* in_mess,int out_socket, sockaddr_in p
         get_enum_name(in_mess->ran_indication_request->target_params[par_i]));
 
         // Handle the new parameters here
-        switch (in_mess->ran_indication_request->target_params[par_i]) {
-            case RAN_PARAMETER__UE_RSRP:
-                // Extract UE_RSRP value from the gNB's data and store it
-                connected_ue_list[i].ue_rsrp = get_ue_rsrp_from_gNB()
-                break;
-            case RAN_PARAMETER__UE_BER_UPLINK:
-                // Extract UE_BER_UPLINK value and store it
-                connected_ue_list[i].ue_ber_uplink = get_ue_ber_uplink_from_gNB();
-                break;
-            case RAN_PARAMETER__UE_BER_DOWNLINK:
-                connected_ue_list[i].ue_ber_downlink = get_ue_ber_downlink_from_gNB();
-                break;
-            case RAN_PARAMETER__UE_MCS_UPLINK:
+//        switch (in_mess->ran_indication_request->target_params[par_i]) {
+//            case RAN_PARAMETER__UE_RSRP:
+//                // Extract UE_RSRP value from the gNB's data and store it
+//                connected_ue_list[i].ue_rsrp = get_ue_rsrp_from_gNB()
+//                break;
+//            case RAN_PARAMETER__UE_BER_UPLINK:
+//                // Extract UE_BER_UPLINK value and store it
+//                connected_ue_list[i].ue_ber_uplink = get_ue_ber_uplink_from_gNB();
+//                break;
+//            case RAN_PARAMETER__UE_BER_DOWNLINK:
+//                connected_ue_list[i].ue_ber_downlink = get_ue_ber_downlink_from_gNB();
+//                break;
+//            case RAN_PARAMETER__UE_MCS_UPLINK:
                 // Extract UE_MCS_UPLINK value and store it
-                connected_ue_list[i].ue_mcs_uplink = get_ue_mcs_uplink_from_gNB();
-                break;
-            case RAN_PARAMETER__UE_MCS_DOWNLINK:
-                // Extract UE_MCS_DOWNLINK value and store it
-                connected_ue_list[i].ue_mcs_downlink = get_ue_mcs_downlink_from_gNB();
-                break;
-            case RAN_PARAMETER__CELL_SIZE:
+//                connected_ue_list[i].ue_mcs_uplink = get_ue_mcs_uplink_from_gNB();
+//                break;
+//            case RAN_PARAMETER__UE_MCS_DOWNLINK:
+//                // Extract UE_MCS_DOWNLINK value and store it
+//                connected_ue_list[i].ue_mcs_downlink = get_ue_mcs_downlink_from_gNB();
+//                break;
+//            case RAN_PARAMETER__CELL_SIZE:
                 // Extract CELL_SIZE value and store it
-                connected_ue_list[i].cell_size = get_cell_size_from_gNB();
-                break;
+//                connected_ue_list[i].cell_size = get_cell_size_from_gNB();
+//                break;
             
             
-            default:
+//            default:
                 // Handle unknown parameter or report an error
-                break;
-        }
+//                break;
+//        }
     }
     build_indication_response(in_mess, out_socket, peeraddr);
 }
+
 
 /*
 this function builds and sends the indication response based on the map inside the in_mess
