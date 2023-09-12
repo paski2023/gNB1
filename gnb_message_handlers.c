@@ -59,37 +59,6 @@ void handle_indication_request(RANMessage* in_mess,int out_socket, sockaddr_in p
         in_mess->ran_indication_request->target_params[par_i],\
         get_enum_name(in_mess->ran_indication_request->target_params[par_i]));
 
-        // Handle the new parameters here
-//        switch (in_mess->ran_indication_request->target_params[par_i]) {
-//            case RAN_PARAMETER__UE_RSRP:
-//                // Extract UE_RSRP value from the gNB's data and store it
-//                connected_ue_list[i].ue_rsrp = get_ue_rsrp_from_gNB()
-//                break;
-//            case RAN_PARAMETER__UE_BER_UPLINK:
-//                // Extract UE_BER_UPLINK value and store it
-//                connected_ue_list[i].ue_ber_uplink = get_ue_ber_uplink_from_gNB();
-//                break;
-//            case RAN_PARAMETER__UE_BER_DOWNLINK:
-//                connected_ue_list[i].ue_ber_downlink = get_ue_ber_downlink_from_gNB();
-//                break;
-//            case RAN_PARAMETER__UE_MCS_UPLINK:
-                // Extract UE_MCS_UPLINK value and store it
-//                connected_ue_list[i].ue_mcs_uplink = get_ue_mcs_uplink_from_gNB();
-//                break;
-//            case RAN_PARAMETER__UE_MCS_DOWNLINK:
-//                // Extract UE_MCS_DOWNLINK value and store it
-//                connected_ue_list[i].ue_mcs_downlink = get_ue_mcs_downlink_from_gNB();
-//                break;
-//            case RAN_PARAMETER__CELL_SIZE:
-                // Extract CELL_SIZE value and store it
-//                connected_ue_list[i].cell_size = get_cell_size_from_gNB();
-//                break;
-            
-            
-//            default:
-                // Handle unknown parameter or report an error
-//                break;
-//        }
     }
     build_indication_response(in_mess, out_socket, peeraddr);
 }
