@@ -216,7 +216,7 @@ void set_ue_properties(int rnti, float ber_uplink, float ber_downlink, float rsr
             connected_ue_list[ue].ue_rsrp = rsrp;
             connected_ue_list[ue].ue_mcs_uplink = mcs_uplink;
             connected_ue_list[ue].ue_mcs_uplink = mcs_downlink;
-            connected_ue_list[ue].ue_cell_size = cell_size;
+            connected_ue_list[ue].cell_size = cell_size;
             
             rnti_not_found = false;
             break;
@@ -309,12 +309,14 @@ UeListM* build_ue_list_message(){
         // read mesures and add to message (actually just send random data)
 
         // measures
+        /*
         ue_info_list[i]->has_meas_type_1 = 1;
         ue_info_list[i]->meas_type_1 = rand();
         ue_info_list[i]->has_meas_type_2 = 1;
         ue_info_list[i]->meas_type_2 = rand();
         ue_info_list[i]->has_meas_type_3 = 1;
         ue_info_list[i]->meas_type_3 = rand();
+        */
 
         ue_info_list[i]->has_ue_ber_uplink = 1;
         ue_info_list[i]->ue_ber_uplink = rand();
@@ -330,12 +332,14 @@ UeListM* build_ue_list_message(){
         ue_info_list[i]->cell_size = rand();
 
         // properties
+        /*
         ue_info_list[i]->has_prop_1 = 1;
         ue_info_list[i]->prop_1 = connected_ue_list[i].prop_1;
         if(connected_ue_list[i].prop_2 > -1){
             ue_info_list[i]->has_prop_2 = 1;
             ue_info_list[i]->prop_2 = connected_ue_list[i].prop_2;
         }
+        */
 
 
     }
