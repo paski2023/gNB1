@@ -404,7 +404,7 @@ void ran_read(RANParameter ran_par_enum, RANParamMapEntry* map_entry){
         case RAN_PARAMETER__CELL_SIZE:
             // Set CELL_SIZE value in map_entry
             map_entry->value_case = RAN_PARAM_MAP_ENTRY__VALUE_INT64_VALUE;
-            map_entry->int64_value map_entry -> ue_list -> ue_info -> cell_size;
+            map_entry->int64_value = map_entry -> ue_list -> ue_info -> cell_size;
             break;
         
         default:
