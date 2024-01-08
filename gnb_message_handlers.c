@@ -17,6 +17,13 @@ typedef struct {
     float ue_mcs_downlink;
     int cell_size; 
 } ue_struct;
+// Rispetto al file iniziale sono stati aggiunti degli attributi di tipo
+// float nello struct per i parametri aggiuntivi
+
+// Si realizza un array composto in questo caso da 4 elementi
+// L'array è composto da elementi di tipo ue_struct 
+// Quindi dal tipo di dato definito sopra
+
 ue_struct connected_ue_list[CONNECTED_UES];
 
 /*
@@ -25,16 +32,15 @@ ue_struct connected_ue_list[CONNECTED_UES];
 void initialize_ues_if_needed(){
     if(is_initialized)
         return;
-    for (int ue=0;ue<CONNECTED_UES;ue++){
+    for (int ue = 0; ue < CONNECTED_UES; ue++)
+    {
         connected_ue_list[ue].rnti = rand();
         connected_ue_list[ue].ue_rsrp = rand();
         connected_ue_list[ue].ue_ber_uplink = rand();
         connected_ue_list[ue].ue_ber_downlink = rand();
+        connected_ue_list[ue].ue_mcs_uplink = rand();
         connected_ue_list[ue].ue_mcs_downlink = rand();
-        connected_ue_list[ue].ue_mcs_downlink = rand();
-        connected_ue_list[ue].cell_size = rand();
-        
-        
+        connected_ue_list[ue].cell_size = rand();    
     }
     is_initialized = true;
 }
@@ -176,12 +182,6 @@ void ran_write(RANParamMapEntry* target_param_map_entry){
             break;
         case RAN_PARAMETER__UE_LIST: // if we receive a ue list message we need to apply its content
             apply_properties_to_ue_list(target_param_map_entry->ue_list);
-            connected_ue_list[i].ue_ber_uplink = map_entry->ue_list->ue_info[i]->ue_ber_uplink;
-            connected_ue_list[i].ue_ber_downlink = map_entry->ue_list->ue_info[i]->ue_ber_downlink;
-            connected_ue_list[i].ue_rsrp = map_entry->ue_list->ue_info[i]->ue_rsrp;
-            connected_ue_list[i].ue_mcs_uplink = map_entry->ue_list->ue_info[i]->ue_mcs_uplink;
-            connected_ue_list[i].ue_mcs_downlink = map_entry->ue_list->ue_info[i]->ue_mcs_downlink;
-            connected_ue_list[i].cell_size = map_entry->ue_list->ue_info[i]->cell_size;
             break;
         default:
             printf("ERROR: cannot write RAN, unrecognized target param %d\n", target_param_map_entry->key);
@@ -192,15 +192,13 @@ void apply_properties_to_ue_list(UeListM* ue_list){
     // loop the ues and apply what needed to each, according to what is inside the list received from the xapp
     for(int ue=0; ue<ue_list->n_ue_info; ue++){
         // apply generic properties (example)
-        set_ue_properties(ue_list->ue_info[ue]->rnti,
-                          ue_list->ue_info[ue]->prop_1,
-                          ue_list->ue_info[ue]->prop_2);
-                          ue_list->ue_info[ue]->ue_ber_uplink,
-                          ue_list->ue_info[ue]->ue_ber_downlink,
-                          ue_list->ue_info[ue]->ue_rsrp,
-                          ue_list->ue_info[ue]->ue_mcs_uplink,
-                          ue_list->ue_info[ue]->ue_mcs_downlink,
-                          ue_list->ue_info[ue]->cell_size);
+        set_ue_properties(ue_list -> ue_info[ue].rnti,
+                          ue_list -> ue_info[ue].ue_ber_uplink,
+                          ue_list -> ue_info[ue].ue_ber_downlink,
+                          ue_list -> ue_info[ue].ue_rsrp,
+                          ue_list -> ue_info[ue].ue_mcs_uplink,
+                          ue_list -> ue_info[ue].ue_mcs_downlink,
+                          ue_list -> ue_info[ue].cell_size);
 
         // more stuff later when needed     
     }
@@ -213,8 +211,6 @@ void set_ue_properties(int rnti, bool prop_1, float prop_2, float ber_uplink, fl
     for(int ue=0; ue<CONNECTED_UES; ue++) {
         if(connected_ue_list[ue].rnti == rnti){
             printf("RNTI found\n");
-            connected_ue_list[ue].prop_1 = prop_1;
-            connected_ue_list[ue].prop_2 = prop_2;
             connected_ue_list[ue].ue_ber_uplink = ue_ber_uplink;
             connected_ue_list[ue].ue_ber_downlink = ue_ber_downlink;
             connected_ue_list[ue].ue_rsrp = ue_rsrp;
@@ -348,7 +344,7 @@ UeListM* build_ue_list_message(){
     // assgin ue info pointer to actually fill the field
     ue_list_m->ue_info = ue_info_list;
     return ue_list_m;
-}
+}\
 
 // careful, this function leaves dangling pointers - not a big deal in this case though 
 void free_ue_list(UeListM* ue_list_m){
