@@ -379,32 +379,32 @@ void ran_read(RANParameter ran_par_enum, RANParamMapEntry* map_entry){
             break;
         case RAN_PARAMETER__UE_RSRP:
             map_entry->value_case = RAN_PARAM_MAP_ENTRY__VALUE_INT64_VALUE;
-            map_entry->int64_value = connected_ue_list[i].ue_rsrp;
+            map_entry->int64_value = map_entry -> ue_list -> ue_info -> ue_rsrp;
             break;
         case RAN_PARAMETER__UE_BER_UPLINK:
             // Set UE_BER_UPLINK value in map_entry
             map_entry->value_case = RAN_PARAM_MAP_ENTRY__VALUE_INT64_VALUE;
-            map_entry->int64_value = connected_ue_list[i].ue_ber_uplink;
+            map_entry->int64_value = map_entry -> ue_list -> ue_info -> ue_ber_uplink;
             break;
         case RAN_PARAMETER__UE_BER_DOWNLINK:
             // Set UE_BER_DOWNLINK value in map_entry
             map_entry->value_case = RAN_PARAM_MAP_ENTRY__VALUE_INT64_VALUE;
-            map_entry->int64_value = connected_ue_list[i].ue_ber_downlink;
+            map_entry->int64_value = map_entry -> ue_list -> ue_info -> ue_ber_downlink;
             break;
          case RAN_PARAMETER__UE_MCS_UPLINK:
             // Set UE_MCS_UPLINK value in map_entry
             map_entry->value_case = RAN_PARAM_MAP_ENTRY__VALUE_INT64_VALUE;
-            map_entry->int64_value = connected_ue_list[i].ue_mcs_uplink;
+            map_entry->int64_value = map_entry -> ue_list -> ue_info -> ue_mcs_uplink;
             break;
         case RAN_PARAMETER__UE_MCS_DOWNLINK:
             // Set UE_MCS_DOWNLINK value in map_entry
             map_entry->value_case = RAN_PARAM_MAP_ENTRY__VALUE_INT64_VALUE;
-            map_entry->int64_value = connected_ue_list[i].ue_mcs_downlink;
+            map_entry->int64_value = map_entry -> ue_list -> ue_info -> ue_mcs_downlink;
             break;
         case RAN_PARAMETER__CELL_SIZE:
             // Set CELL_SIZE value in map_entry
             map_entry->value_case = RAN_PARAM_MAP_ENTRY__VALUE_INT64_VALUE;
-            map_entry->int64_value = connected_ue_list[i].cell_size;
+            map_entry->int64_value map_entry -> ue_list -> ue_info -> cell_size;
             break;
         
         default:
