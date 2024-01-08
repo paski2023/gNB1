@@ -196,7 +196,7 @@ void apply_properties_to_ue_list(UeListM* ue_list){
                           ue_list -> ue_info[ue] -> ue_ber_uplink,
                           ue_list -> ue_info[ue] -> ue_ber_downlink,
                           ue_list -> ue_info[ue] -> ue_rsrp,
-                          ue_list -> ue_info[ue] ->ue_mcs_uplink,
+                          ue_list -> ue_info[ue] -> ue_mcs_uplink,
                           ue_list -> ue_info[ue] -> ue_mcs_downlink,
                           ue_list -> ue_info[ue] -> cell_size);
 
@@ -204,7 +204,7 @@ void apply_properties_to_ue_list(UeListM* ue_list){
     }
 }
 
-void set_ue_properties(int rnti, bool prop_1, float prop_2, float ber_uplink, float ber_downlink, float rsrp, float mcs_uplink, float mcs_downlink, int cell_size){
+void set_ue_properties(int rnti, float ber_uplink, float ber_downlink, float rsrp, float mcs_uplink, float mcs_downlink, int cell_size){
 
     // iterate ue list until rnti is found
     bool rnti_not_found = true;
