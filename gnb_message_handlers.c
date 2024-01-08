@@ -377,6 +377,8 @@ void ran_read(RANParameter ran_par_enum, RANParamMapEntry* map_entry){
             map_entry->value_case=RAN_PARAM_MAP_ENTRY__VALUE_UE_LIST;
             map_entry->ue_list = build_ue_list_message();
             break;
+            
+        /*
         case RAN_PARAMETER__UE_RSRP:
             map_entry->value_case = RAN_PARAM_MAP_ENTRY__VALUE_INT64_VALUE;
             map_entry->int64_value = map_entry -> ue_list -> ue_info -> ue_rsrp;
@@ -406,6 +408,7 @@ void ran_read(RANParameter ran_par_enum, RANParamMapEntry* map_entry){
             map_entry->value_case = RAN_PARAM_MAP_ENTRY__VALUE_INT64_VALUE;
             map_entry->int64_value = map_entry -> ue_list -> ue_info -> cell_size;
             break;
+        */
         
         default:
             printf("Unrecognized param %d\n",ran_par_enum);
