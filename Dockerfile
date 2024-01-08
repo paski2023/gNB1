@@ -5,7 +5,7 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/*
 
 # clone repo
-RUN git clone https://github.com/paski2023/gNB1.git /gNB1
+RUN git clone https://github.com/paski2023/gNB1
 WORKDIR /gNB1
 
 # checkout mrn-base
