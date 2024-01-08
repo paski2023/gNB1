@@ -211,11 +211,11 @@ void set_ue_properties(int rnti, float ber_uplink, float ber_downlink, float rsr
     for(int ue=0; ue<CONNECTED_UES; ue++) {
         if(connected_ue_list[ue].rnti == rnti){
             printf("RNTI found\n");
-            connected_ue_list[ue].ue_ber_uplink = ue_ber_uplink;
-            connected_ue_list[ue].ue_ber_downlink = ue_ber_downlink;
-            connected_ue_list[ue].ue_rsrp = ue_rsrp;
-            connected_ue_list[ue].ue_mcs_uplink = ue_mcs_uplink;
-            connected_ue_list[ue].ue_mcs_uplink = ue_mcs_downlink;
+            connected_ue_list[ue].ue_ber_uplink = ber_uplink;
+            connected_ue_list[ue].ue_ber_downlink = ber_downlink;
+            connected_ue_list[ue].ue_rsrp = rsrp;
+            connected_ue_list[ue].ue_mcs_uplink = mcs_uplink;
+            connected_ue_list[ue].ue_mcs_uplink = mcs_downlink;
             connected_ue_list[ue].ue_cell_size = cell_size;
             
             rnti_not_found = false;
