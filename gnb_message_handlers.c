@@ -13,9 +13,9 @@ typedef struct {
     float ue_rsrp;
     float ue_ber_uplink;
     float ue_ber_downlink;
-    float ue_mcs_uplink;
-    float ue_mcs_downlink;
-    int cell_size; 
+    MCS ue_mcs_uplink;
+    MCS ue_mcs_downlink;
+    int cell_load; 
 } ue_struct;
 // Rispetto al file iniziale sono stati aggiunti degli attributi di tipo
 // float nello struct per i parametri aggiuntivi
@@ -38,9 +38,9 @@ void initialize_ues_if_needed(){
         connected_ue_list[ue].ue_rsrp = rand();
         connected_ue_list[ue].ue_ber_uplink = rand();
         connected_ue_list[ue].ue_ber_downlink = rand();
-        connected_ue_list[ue].ue_mcs_uplink = rand();
-        connected_ue_list[ue].ue_mcs_downlink = rand();
-        connected_ue_list[ue].cell_size = rand();    
+        connected_ue_list[ue].ue_mcs_uplink = rand()%MCS.n_schemes;
+        connected_ue_list[ue].ue_mcs_downlink = rand()%MCS.n_schemes;
+        connected_ue_list[ue].cell_load = rand();    
     }
     is_initialized = true;
 }
@@ -198,13 +198,13 @@ void apply_properties_to_ue_list(UeListM* ue_list){
                           ue_list -> ue_info[ue] -> ue_rsrp,
                           ue_list -> ue_info[ue] -> ue_mcs_uplink,
                           ue_list -> ue_info[ue] -> ue_mcs_downlink,
-                          ue_list -> ue_info[ue] -> cell_size);
+                          ue_list -> ue_info[ue] -> cell_load);
 
         // more stuff later when needed     
     }
 }
 
-void set_ue_properties(int rnti, float ber_uplink, float ber_downlink, float rsrp, float mcs_uplink, float mcs_downlink, int cell_size){
+void set_ue_properties(int rnti, float ber_uplink, float ber_downlink, float rsrp, float mcs_uplink, float mcs_downlink, int cell_load){
 
     // iterate ue list until rnti is found
     bool rnti_not_found = true;
@@ -216,7 +216,7 @@ void set_ue_properties(int rnti, float ber_uplink, float ber_downlink, float rsr
             connected_ue_list[ue].ue_rsrp = rsrp;
             connected_ue_list[ue].ue_mcs_uplink = mcs_uplink;
             connected_ue_list[ue].ue_mcs_uplink = mcs_downlink;
-            connected_ue_list[ue].cell_size = cell_size;
+            connected_ue_list[ue].cell_load = cell_load;
             
             rnti_not_found = false;
             break;
@@ -303,7 +303,7 @@ UeListM* build_ue_list_message(){
         ue_info_list[i]->ue_rsrp = connected_ue_list[i].ue_rsrp;  
         ue_info_list[i]->ue_mcs_uplink = connected_ue_list[i].ue_mcs_uplink;   
         ue_info_list[i]->ue_mcs_downlink = connected_ue_list[i].ue_mcs_downlink;
-        ue_info_list[i]->cell_size = connected_ue_list[i].cell_size;
+        ue_info_list[i]->cell_load = connected_ue_list[i].cell_load;
 
 
         // read mesures and add to message (actually just send random data)
@@ -323,13 +323,13 @@ UeListM* build_ue_list_message(){
         ue_info_list[i]->has_ue_ber_downlink = 1;
         ue_info_list[i]->ue_ber_downlink = rand();
         ue_info_list[i]->has_ue_mcs_uplink = 1;
-        ue_info_list[i]->ue_mcs_uplink= rand();
+        ue_info_list[i]->ue_mcs_uplink= rand()%MCS.n_schemes;
         ue_info_list[i]->has_ue_mcs_downlink = 1;
-        ue_info_list[i]->ue_mcs_downlink= rand();
+        ue_info_list[i]->ue_mcs_downlink= rand()%MCS.n_schemes;
         ue_info_list[i]->has_ue_rsrp = 1;
         ue_info_list[i]->ue_rsrp= rand();
-        ue_info_list[i]->has_cell_size = 1;
-        ue_info_list[i]->cell_size = rand();
+        ue_info_list[i]->has_cell_load = 1;
+        ue_info_list[i]->cell_load = rand();
 
         // properties
         /*
