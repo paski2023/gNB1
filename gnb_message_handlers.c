@@ -35,12 +35,6 @@ void initialize_ues_if_needed(){
     for (int ue = 0; ue < CONNECTED_UES; ue++)
     {
         connected_ue_list[ue].rnti = rand();
-        connected_ue_list[ue].ue_rsrp = rand();
-        connected_ue_list[ue].ue_ber_uplink = rand();
-        connected_ue_list[ue].ue_ber_downlink = rand();
-        connected_ue_list[ue].ue_mcs_uplink = rand()%MCS.n_schemes;
-        connected_ue_list[ue].ue_mcs_downlink = rand()%MCS.n_schemes;
-        connected_ue_list[ue].cell_load = rand();    
     }
     is_initialized = true;
 }
@@ -211,13 +205,14 @@ void set_ue_properties(int rnti, float ber_uplink, float ber_downlink, float rsr
     for(int ue=0; ue<CONNECTED_UES; ue++) {
         if(connected_ue_list[ue].rnti == rnti){
             printf("RNTI found\n");
+            /*
             connected_ue_list[ue].ue_ber_uplink = ber_uplink;
             connected_ue_list[ue].ue_ber_downlink = ber_downlink;
             connected_ue_list[ue].ue_rsrp = rsrp;
             connected_ue_list[ue].ue_mcs_uplink = mcs_uplink;
             connected_ue_list[ue].ue_mcs_uplink = mcs_downlink;
             connected_ue_list[ue].cell_load = cell_load;
-            
+            */
             rnti_not_found = false;
             break;
         } else {
@@ -298,26 +293,7 @@ UeListM* build_ue_list_message(){
 
         // read rnti and add to message
         ue_info_list[i]->rnti = connected_ue_list[i].rnti;
-        ue_info_list[i]->ue_ber_uplink = connected_ue_list[i].ue_ber_uplink;  
-        ue_info_list[i]->ue_ber_downlink = connected_ue_list[i].ue_ber_downlink ; 
-        ue_info_list[i]->ue_rsrp = connected_ue_list[i].ue_rsrp;  
-        ue_info_list[i]->ue_mcs_uplink = connected_ue_list[i].ue_mcs_uplink;   
-        ue_info_list[i]->ue_mcs_downlink = connected_ue_list[i].ue_mcs_downlink;
-        ue_info_list[i]->cell_load = connected_ue_list[i].cell_load;
-
-
-        // read mesures and add to message (actually just send random data)
-
-        // measures
-        /*
-        ue_info_list[i]->has_meas_type_1 = 1;
-        ue_info_list[i]->meas_type_1 = rand();
-        ue_info_list[i]->has_meas_type_2 = 1;
-        ue_info_list[i]->meas_type_2 = rand();
-        ue_info_list[i]->has_meas_type_3 = 1;
-        ue_info_list[i]->meas_type_3 = rand();
-        */
-
+        
         ue_info_list[i]->has_ue_ber_uplink = 1;
         ue_info_list[i]->ue_ber_uplink = rand();
         ue_info_list[i]->has_ue_ber_downlink = 1;
@@ -375,40 +351,7 @@ void ran_read(RANParameter ran_par_enum, RANParamMapEntry* map_entry){
             break;
         case RAN_PARAMETER__UE_LIST:
             map_entry->value_case=RAN_PARAM_MAP_ENTRY__VALUE_UE_LIST;
-            map_entry->ue_list = build_ue_list_message();
-            break;
-            
-        /*
-        case RAN_PARAMETER__UE_RSRP:
-            map_entry->value_case = RAN_PARAM_MAP_ENTRY__VALUE_INT64_VALUE;
-            map_entry->int64_value = map_entry -> ue_list -> ue_info -> ue_rsrp;
-            break;
-        case RAN_PARAMETER__UE_BER_UPLINK:
-            // Set UE_BER_UPLINK value in map_entry
-            map_entry->value_case = RAN_PARAM_MAP_ENTRY__VALUE_INT64_VALUE;
-            map_entry->int64_value = map_entry -> ue_list -> ue_info -> ue_ber_uplink;
-            break;
-        case RAN_PARAMETER__UE_BER_DOWNLINK:
-            // Set UE_BER_DOWNLINK value in map_entry
-            map_entry->value_case = RAN_PARAM_MAP_ENTRY__VALUE_INT64_VALUE;
-            map_entry->int64_value = map_entry -> ue_list -> ue_info -> ue_ber_downlink;
-            break;
-         case RAN_PARAMETER__UE_MCS_UPLINK:
-            // Set UE_MCS_UPLINK value in map_entry
-            map_entry->value_case = RAN_PARAM_MAP_ENTRY__VALUE_INT64_VALUE;
-            map_entry->int64_value = map_entry -> ue_list -> ue_info -> ue_mcs_uplink;
-            break;
-        case RAN_PARAMETER__UE_MCS_DOWNLINK:
-            // Set UE_MCS_DOWNLINK value in map_entry
-            map_entry->value_case = RAN_PARAM_MAP_ENTRY__VALUE_INT64_VALUE;
-            map_entry->int64_value = map_entry -> ue_list -> ue_info -> ue_mcs_downlink;
-            break;
-        case RAN_PARAMETER__CELL_SIZE:
-            // Set CELL_SIZE value in map_entry
-            map_entry->value_case = RAN_PARAM_MAP_ENTRY__VALUE_INT64_VALUE;
-            map_entry->int64_value = map_entry -> ue_list -> ue_info -> cell_size;
-            break;
-        */
+            map_entry->ue_list = build_ue_list_message();            break;
         
         default:
             printf("Unrecognized param %d\n",ran_par_enum);
