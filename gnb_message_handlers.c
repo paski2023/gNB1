@@ -198,7 +198,7 @@ void apply_properties_to_ue_list(UeListM* ue_list){
     }
 }
 
-void set_ue_properties(int rnti, float ber_uplink, float ber_downlink, float rsrp, float mcs_uplink, float mcs_downlink, int cell_load){
+void set_ue_properties(int rnti){
 
     // iterate ue list until rnti is found
     bool rnti_not_found = true;
@@ -299,9 +299,9 @@ UeListM* build_ue_list_message(){
         ue_info_list[i]->has_ue_ber_downlink = 1;
         ue_info_list[i]->ue_ber_downlink = rand();
         ue_info_list[i]->has_ue_mcs_uplink = 1;
-        ue_info_list[i]->ue_mcs_uplink= rand()%MCS.n_schemes;
+        ue_info_list[i]->ue_mcs_uplink= rand();
         ue_info_list[i]->has_ue_mcs_downlink = 1;
-        ue_info_list[i]->ue_mcs_downlink= rand()%MCS.n_schemes;
+        ue_info_list[i]->ue_mcs_downlink= rand();
         ue_info_list[i]->has_ue_rsrp = 1;
         ue_info_list[i]->ue_rsrp= rand();
         ue_info_list[i]->has_cell_load = 1;
@@ -324,7 +324,7 @@ UeListM* build_ue_list_message(){
     // assgin ue info pointer to actually fill the field
     ue_list_m->ue_info = ue_info_list;
     return ue_list_m;
-}\
+}
 
 // careful, this function leaves dangling pointers - not a big deal in this case though 
 void free_ue_list(UeListM* ue_list_m){
