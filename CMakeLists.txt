@@ -14,8 +14,8 @@ set(CMAKE_EXE_LINKER_FLAGS "${PROTOBUF_LINK_FLAG}")
 
 add_executable(gnb_e2server_emu
         gnb_e2server_emu.c
-        oai-oran-protolib/builds/ran_messages.pb-c.h
-        oai-oran-protolib/builds/ran_messages.pb-c.c
+        Protolib1/builds/ran_messages.pb-c.h
+        Protolib1/builds/ran_messages.pb-c.c
         gnb_message_handlers.c
         gnb_message_handlers.h)
 
