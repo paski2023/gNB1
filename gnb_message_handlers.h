@@ -7,7 +7,7 @@
 
 #endif //OPENAIRINTERFACE_E2_MESSAGE_HANDLERS_H
 
-#include "oai-oran-protolib/builds/ran_messages.pb-c.h"
+#include "Protolib1/builds/ran_messages.pb-c.h"
 #include <stdlib.h>
 #include <assert.h>
 #include <stdio.h>
