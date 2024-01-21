@@ -1,5 +1,5 @@
 #!/bin/bash
 
 git submodule update --init
-cd oai-oran-protolib
+cd Protolib1
 git checkout mrn-base
