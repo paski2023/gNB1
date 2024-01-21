@@ -186,13 +186,7 @@ void apply_properties_to_ue_list(UeListM* ue_list){
     // loop the ues and apply what needed to each, according to what is inside the list received from the xapp
     for(int ue=0; ue<ue_list->n_ue_info; ue++){
         // apply generic properties (example)
-        set_ue_properties(ue_list -> ue_info[ue] -> rnti,
-                          ue_list -> ue_info[ue] -> ue_ber_uplink,
-                          ue_list -> ue_info[ue] -> ue_ber_downlink,
-                          ue_list -> ue_info[ue] -> ue_rsrp,
-                          ue_list -> ue_info[ue] -> ue_mcs_uplink,
-                          ue_list -> ue_info[ue] -> ue_mcs_downlink,
-                          ue_list -> ue_info[ue] -> cell_load);
+        set_ue_properties(ue_list -> ue_info[ue] -> rnti);
 
         // more stuff later when needed     
     }
