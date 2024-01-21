@@ -36,6 +36,6 @@ void free_ran_param_map(RANParamMapEntry **map);
 void free_ue_list(UeListM* ue_list_m);
 
 // specific ran write functions
-void set_ue_properties(int rnti, float ue_ber_uplink, float ue_ber_downlink, float ue_mcs_uplink, float ue_msc_downlink, float ue_rsrp, int cell_size);
+void set_ue_properties(int rnti);
 void apply_properties_to_ue_list(UeListM* ue_list);
 void initialize_ues_if_needed();
